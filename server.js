@@ -8,7 +8,10 @@ const mongoose = require("mongoose") //mongoose
 const bodyParser = require("body-parser") //mongoose
 const session = require("express-session") //mongoose
 
-
+require('dotenv').config()
+const MONGO_USER = process.env.MONGO_USER;
+const MONGO_PASS = process.env.MONGO_PASS;
+const MONGO_DB_NAME = process.env.MONGO_DB_NAME;
 
 
 // var app = express()
@@ -20,7 +23,10 @@ server.use(session({
   cookie: { maxAge:60000}
 }))
 
-mongoose.connect("mongodb://localhost/biblio",{
+const uri = `mongodb+srv://${MONGO_USER}:${MONGO_PASS}@biblio.88h4ztk.mongodb.net/${MONGO_DB_NAME}?retryWrites=true&w=majority`;
+
+// mongoose.connect("mongodb://localhost/biblio",{//en local
+mongoose.connect(uri,{
         useNewUrlParser: true,
         useUnifiedTopology: true
 })

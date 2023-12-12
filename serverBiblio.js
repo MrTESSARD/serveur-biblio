@@ -1,5 +1,10 @@
+const PORT = 3012
 const express = require("express")//recupération
-const server = express() //lancement
+const { readFileSync } = require('fs');
+const router = express()
+const cors = require('cors')
+
+const { createServer } = require('https');
 const morgan = require("morgan") //morgan HTTP request logger middleware for node.js
 const routerLivres = require("./routeurs/livres.routeur") 
 const routerGlobal = require("./routeurs/global.routeur") 
@@ -13,10 +18,10 @@ const MONGO_USER = process.env.MONGO_USER;
 const MONGO_PASS = process.env.MONGO_PASS;
 const MONGO_DB_NAME = process.env.MONGO_DB_NAME;
 
-
+router.use(cors())
 // var app = express()
 // app.set('trust proxy', 1) // trust first proxy
-server.use(session({
+router.use(session({
   secret: 'keyboard cat',
   resave: true,
   saveUninitialized: true,
@@ -34,23 +39,35 @@ mongoose.connect(uri,{
 
 
 
-server.use(express.static("public")) //indiquer le dossier public , libre d'accès
-server.use(morgan("dev"))
-server.use(bodyParser.urlencoded({extended:false}))
+router.use(express.static("public")) //indiquer le dossier public , libre d'accès
+router.use(morgan("dev"))
+router.use(bodyParser.urlencoded({extended:false}))
 
-server.use((requete, reponse, suite)=>{
+router.use((requete, reponse, suite)=>{
         reponse.locals.message = requete.session.message
         delete requete.session.message
         suite()
 
 })
 
-server.set('trust proxy', 1) // trust first proxy
+router.set('trust proxy', 1) // trust first proxy
 
-server.use("/livres/", routerLivres)
-server.use("/auteurs/", routerAuteur)
-server.use("/", routerGlobal)
-
-server.listen(3012) //écoute sur port 
+router.use("/livres/", routerLivres)
+router.use("/auteurs/", routerAuteur)
+router.use("/", routerGlobal)
 
 
+// Configuration des options HTTPS
+const options = {
+        key: readFileSync("certLetVPS/VPS_LC2/privkey.pem"),
+        cert: readFileSync("certLetVPS/VPS_LC2/fullchain.pem"),
+      };
+      
+      // Création du serveur HTTPS
+      const server = createServer(options, router);
+         
+// Écoute sur le port 3012 en mode HTTPS
+server.listen(PORT, () => {
+        console.log(`Le serveur est en écoute sur le port ${PORT} en mode HTTPS.`);
+        // mongoDBClient.initialize();
+      });

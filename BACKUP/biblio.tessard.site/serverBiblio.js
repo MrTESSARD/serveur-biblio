@@ -59,10 +59,8 @@ router.use("/", routerGlobal)
 
 // Configuration des options HTTPS
 const options = {
-        key: readFileSync('localhost.key'),//localhost
-        cert: readFileSync('localhost.crt')
-        // key: readFileSync("certLetVPS/VPS_LC2/privkey.pem"),
-        // cert: readFileSync("certLetVPS/VPS_LC2/fullchain.pem"),
+        key: readFileSync("certLetVPS/VPS_LC2/privkey.pem"),
+        cert: readFileSync("certLetVPS/VPS_LC2/fullchain.pem"),
       };
       
       // Création du serveur HTTPS

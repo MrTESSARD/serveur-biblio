@@ -1,0 +1,35 @@
+{
+  "name": "siteserveur",
+  "version": "1.0.0",
+  "description": "��#\u0000 \u0000s\u0000e\u0000r\u0000v\u0000e\u0000u\u0000r\u0000-\u0000b\u0000i\u0000b\u0000l\u0000i\u0000o\u0000\r\u0000 \u0000",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TESSARD/serveur-biblio.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/TESSARD/serveur-biblio/issues"
+  },
+  "homepage": "https://github.com/TESSARD/serveur-biblio#readme",
+  "dependencies": {
+    "body-parser": "^1.20.1",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "express-session": "^1.17.3",
+    "mongoose": "^6.9.2",
+    "morgan": "^1.10.0",
+    "multer": "^1.4.5-lts.1",
+    "twig": "^1.15.4"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.20"
+  }
+}

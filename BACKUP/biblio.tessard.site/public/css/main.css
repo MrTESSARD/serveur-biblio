@@ -1,0 +1,12 @@
+.p_bgColorBlue{
+    background-color:#158CBA;
+}
+
+h1, h2, h3, h4, h5, h6{
+    font-family: 'Sigmar One', cursive;
+}
+img, svg{
+    max-height: 9rem;
+    height: 100%;
+    width: auto !important;
+}
